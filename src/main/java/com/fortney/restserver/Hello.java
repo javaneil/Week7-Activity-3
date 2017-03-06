@@ -3,6 +3,7 @@ package com.fortney.restserver;
 import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -83,6 +84,10 @@ public class Hello {
     private String convertToJson( List<JsonMsgPojo> list ) {
         ObjectMapper mapper = new ObjectMapper() ;
         String json = "" ;
+
+        // found this on-line, prettys-up the output with CR/LFs
+        mapper.configure( SerializationFeature.INDENT_OUTPUT, true ) ;
+
         try {
             json = mapper.writeValueAsString( list ) ;
         }
