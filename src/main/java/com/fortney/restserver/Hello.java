@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fortney.entity.JsonMsgPojo;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -19,12 +20,15 @@ import java.util.List;
  * Created by Neil on 3/2/2017.
  */
 
-@Path( "/hello" )
+
+@Path( "/" )
+@Produces( {MediaType.APPLICATION_JSON, MediaType.TEXT_HTML} )
 public class Hello {
 
     @GET
     @Path( "/{param}" )
     public Response getMessage( @PathParam( "param" ) String msg ) {
+
         if ( msg.equals( "html" ) ) {
             return returnHtml();
         }
@@ -36,6 +40,7 @@ public class Hello {
             return Response.status(200).entity(output).build() ;
         }
     }
+
 
     @GET
     @Produces( {MediaType.TEXT_HTML} )
@@ -50,24 +55,18 @@ public class Hello {
         return Response.status(200).entity( output ).build() ;
     }
 
-    /**
-     * References:
-     * http://www.mkyong.com/webservices/jax-rs/restful-java-client-with-jersey-client/
-     * https://www.nabisoft.com/tutorials/java-ee/producing-and-consuming-json-or-xml-in-java-rest-services-with-jersey-and-jackson
-     * http://www.mkyong.com/java/how-to-convert-java-object-to-from-json-jackson/
-     * @return
-     */
+
     @GET
     @Produces( {MediaType.APPLICATION_JSON} )
     public Response returnJson() {
 
-        List<JsonMsgPojo> list = genJsonMsg( 3 ) ;
+        List list = genJsonMsg( 3 ) ;
         String json = convertToJson( list ) ;
 
         return Response.status(200).entity( json ).build() ;
     }
 
-    private List<JsonMsgPojo> genJsonMsg( int len ) {
+    private List<JsonMsgPojo> genJsonMsg(int len ) {
         List<JsonMsgPojo> msgArray = new ArrayList<JsonMsgPojo>() ;
 
         for ( int idx = 1; idx <= len; idx++ ) {
@@ -85,7 +84,7 @@ public class Hello {
         ObjectMapper mapper = new ObjectMapper() ;
         String json = "" ;
 
-        // found this on-line, prettys-up the output with CR/LFs
+        // found this on-line, it "prettys" the JSON output with CR/LFs
         mapper.configure( SerializationFeature.INDENT_OUTPUT, true ) ;
 
         try {

@@ -9,7 +9,7 @@ import javax.ws.rs.core.Response;
  * Created by Neil on 3/1/2017.
  */
 
-@Path( "/helloworld" )
+@Path( "/world" )
 public class HelloWorld {
 
     // The Java method will process HTTP GET requests

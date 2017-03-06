@@ -1,4 +1,4 @@
-package com.fortney.restserver;
+package com.fortney.entity;
 
 /**
  * Created by Neil on 3/2/2017.

@@ -10,14 +10,14 @@ import javax.ws.rs.core.Response;
  * Created by Neil on 3/1/2017.
  */
 
-@Path( "/helloname" )
+@Path( "/name" )
 public class HelloName {
 
     @GET
     @Produces( "text/plain" )
     @Path( "/{param}" )
     public Response getMessage( @PathParam( "param" ) String msg ) {
-        String output = "HelloWorld " + msg ;
+        String output = "Hello { " + msg + " }" ;
         return Response.status(200).entity( output ).build() ;
     }
 
