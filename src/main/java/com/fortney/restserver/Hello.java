@@ -25,6 +25,7 @@ import java.util.List;
 @Produces( {MediaType.APPLICATION_JSON, MediaType.TEXT_HTML} )
 public class Hello {
 
+/*
     @GET
     @Path( "/{param}" )
     public Response getMessage( @PathParam( "param" ) String msg ) {
@@ -40,9 +41,10 @@ public class Hello {
             return Response.status(200).entity(output).build() ;
         }
     }
-
+*/
 
     @GET
+    @Path( "/html" )
     @Produces( {MediaType.TEXT_HTML} )
     public Response returnHtml() {
         String output =
@@ -57,6 +59,7 @@ public class Hello {
 
 
     @GET
+    @Path( "/json" )
     @Produces( {MediaType.APPLICATION_JSON} )
     public Response returnJson() {
 
@@ -66,7 +69,7 @@ public class Hello {
         return Response.status(200).entity( json ).build() ;
     }
 
-    private List<JsonMsgPojo> genJsonMsg(int len ) {
+    private List<JsonMsgPojo> genJsonMsg( int len ) {
         List<JsonMsgPojo> msgArray = new ArrayList<JsonMsgPojo>() ;
 
         for ( int idx = 1; idx <= len; idx++ ) {
